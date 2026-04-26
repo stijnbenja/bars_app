@@ -39,12 +39,12 @@ HeatMap(heat_data, radius=35, blur=25, min_opacity=0.3, max_zoom=16).add_to(m)
 for _, row in df.iterrows():
     folium.CircleMarker(
         location=[row["latitude"], row["longitude"]],
-        radius=3,
+        radius=6,
         color="white",
         weight=0.5,
         fill=True,
         fill_color="white",
-        fill_opacity=0.4,
+        fill_opacity=0.3,
         tooltip=folium.Tooltip(
             f"{row['name']}<br>⭐ {row['rating']} ({int(row['rating_count'])} reviews)",
             sticky=True
