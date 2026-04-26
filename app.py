@@ -44,7 +44,7 @@ for _, row in df.iterrows():
         fill=True,
         fill_color="transparent",
         fill_opacity=0,
-        tooltip=folium.Tooltip(f"{row['name']} — ⭐ {row['rating']} ({int(row['rating_count'])} reviews)")
+        tooltip=folium.Tooltip(f"{row['name']}<br>⭐ {row['rating']} ({int(row['rating_count'])} reviews)", sticky=True)
     ).add_to(m)
 
 st_folium(m, use_container_width=True, height=700)
