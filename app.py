@@ -2,6 +2,7 @@ import streamlit as st
 import folium
 from folium.plugins import HeatMap
 from streamlit_folium import st_folium
+from folium.plugins import LocateControl
 import pandas as pd
 import numpy as np
 
@@ -28,8 +29,12 @@ df["weight"] = rating_weight * (0.3 + 0.7 * log_reviews_norm)
 # Kaart
 m = folium.Map(location=[52.0907, 5.1214], zoom_start=14, tiles="CartoDB positron")
 
+LocateControl(auto_start=False).add_to(m)
+
 heat_data = df[["latitude", "longitude", "weight"]].values.tolist()
 HeatMap(heat_data, radius=35, blur=25, min_opacity=0.3, max_zoom=16).add_to(m)
+
+
 
 for _, row in df.iterrows():
     folium.CircleMarker(
