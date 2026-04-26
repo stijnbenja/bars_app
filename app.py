@@ -36,6 +36,7 @@ HeatMap(heat_data, radius=35, blur=25, min_opacity=0.3, max_zoom=16).add_to(m)
 
 
 
+# Onzichtbare markers voor hover tooltips
 for _, row in df.iterrows():
     folium.CircleMarker(
         location=[row["latitude"], row["longitude"]],
@@ -44,7 +45,23 @@ for _, row in df.iterrows():
         fill=True,
         fill_color="transparent",
         fill_opacity=0,
-        tooltip=folium.Tooltip(f"{row['name']}<br>⭐ {row['rating']} ({int(row['rating_count'])} reviews)", sticky=True)
+        tooltip=folium.Tooltip(f"{row['name']}<br>⭐ {row['rating']}  ({int(row['rating_count'])} reviews)", sticky=True)
+    ).add_to(m)
+    
+    
+for _, row in df.iterrows():
+    folium.CircleMarker(
+        location=[row["latitude"], row["longitude"]],
+        radius=3,
+        color="white",
+        weight=0.5,
+        fill=True,
+        fill_color="white",
+        fill_opacity=0.4,
+        tooltip=folium.Tooltip(
+            f"{row['name']}<br>⭐ {row['rating']} ({int(row['rating_count'])} reviews)",
+            sticky=True
+        )
     ).add_to(m)
 
 st_folium(m, use_container_width=True, height=700)
